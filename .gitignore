@@ -6,3 +6,5 @@ test.cpp
 build/
 bin/
 lib/
+test.cpp
+a.out
