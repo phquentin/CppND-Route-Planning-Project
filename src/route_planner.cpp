@@ -1,6 +1,8 @@
 #include "route_planner.h"
 #include <algorithm>
 
+
+
 RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, float end_x, float end_y): m_Model(model) {
     // Convert inputs to percentage:
     start_x *= 0.01;
@@ -46,6 +48,7 @@ for (RouteModel::Node* node : current_node->neighbors){
     node->h_value = CalculateHValue(node);
     this->open_list.push_back(node);
     node->visited = true;
+    
 }
 
 }
@@ -58,8 +61,20 @@ for (RouteModel::Node* node : current_node->neighbors){
 // - Remove that node from the open_list.
 // - Return the pointer.
 
+bool RoutePlanner::Compare(const RouteModel::Node *a, const RouteModel::Node *b){
+    float f1 = a->g_value + a->h_value ;
+    float f2 = b->g_value + b->h_value ;
+    return f1 > f2; 
+    }
+
 RouteModel::Node *RoutePlanner::NextNode() {
 
+ // order open list in descending order
+ std::sort(open_list.begin(),open_list.end(),Compare);
+
+ RouteModel::Node* lowest_cost_node = open_list.back();
+ open_list.pop_back();
+ return lowest_cost_node;
 }
 
 
