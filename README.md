@@ -1,6 +1,6 @@
 # Route Planning Project
 
-This repo contains the starter code for the Route Planning project.
+This project computes the shortest route between two points, specified by a user, on an Map (Open Street Map) via the A* Algorithm.
 
 <img src="map.png" width="600" height="450" />
 
